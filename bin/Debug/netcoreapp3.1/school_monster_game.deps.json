@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "school_monster_game/1.0.0": {
+        "runtime": {
+          "school_monster_game.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "school_monster_game/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

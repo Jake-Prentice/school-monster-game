@@ -1,0 +1,13 @@
+B:\OneDrive\Desktop\Computer_Science\C#\school_monster_game\bin\Debug\netcoreapp3.1\school_monster_game.exe
+B:\OneDrive\Desktop\Computer_Science\C#\school_monster_game\bin\Debug\netcoreapp3.1\school_monster_game.deps.json
+B:\OneDrive\Desktop\Computer_Science\C#\school_monster_game\bin\Debug\netcoreapp3.1\school_monster_game.runtimeconfig.json
+B:\OneDrive\Desktop\Computer_Science\C#\school_monster_game\bin\Debug\netcoreapp3.1\school_monster_game.runtimeconfig.dev.json
+B:\OneDrive\Desktop\Computer_Science\C#\school_monster_game\bin\Debug\netcoreapp3.1\school_monster_game.dll
+B:\OneDrive\Desktop\Computer_Science\C#\school_monster_game\bin\Debug\netcoreapp3.1\school_monster_game.pdb
+B:\OneDrive\Desktop\Computer_Science\C#\school_monster_game\obj\Debug\netcoreapp3.1\school_monster_game.csprojAssemblyReference.cache
+B:\OneDrive\Desktop\Computer_Science\C#\school_monster_game\obj\Debug\netcoreapp3.1\school_monster_game.AssemblyInfoInputs.cache
+B:\OneDrive\Desktop\Computer_Science\C#\school_monster_game\obj\Debug\netcoreapp3.1\school_monster_game.AssemblyInfo.cs
+B:\OneDrive\Desktop\Computer_Science\C#\school_monster_game\obj\Debug\netcoreapp3.1\school_monster_game.csproj.CoreCompileInputs.cache
+B:\OneDrive\Desktop\Computer_Science\C#\school_monster_game\obj\Debug\netcoreapp3.1\school_monster_game.dll
+B:\OneDrive\Desktop\Computer_Science\C#\school_monster_game\obj\Debug\netcoreapp3.1\school_monster_game.pdb
+B:\OneDrive\Desktop\Computer_Science\C#\school_monster_game\obj\Debug\netcoreapp3.1\school_monster_game.genruntimeconfig.cache
