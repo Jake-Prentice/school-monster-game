@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace monster
 
@@ -12,31 +13,45 @@ namespace monster
         public static Actor Player;
         public static Actor Monster;
         public static Actor Flask;
-        public static Actor Trap;
+        public static List<Actor> Traps = new List<Actor>();
+
+        public static int NumOfTraps = 2;
 
         static void Main(string[] args)
         {
-            
+
             Cavern = new GameCanvas(width: 7, height: 5);
 
             Player = Cavern.CreateActor(graphic: '*');
             Monster = Cavern.CreateActor(graphic: 'M', isVisible: false);
             Flask = Cavern.CreateActor(graphic: 'F');
-            Trap = Cavern.CreateActor(graphic: 'T');
 
+            CreateTraps(n: 2);
+         
             int Choice = 0;
             while (Choice != 3)
             {
                 Player.MoveTo(Cavern.GetRandomPosition());
                 Monster.MoveTo(Cavern.GetRandomPosition());
                 Flask.MoveTo(Cavern.GetRandomPosition());
-                Trap.MoveTo(Cavern.GetRandomPosition());
 
                 DisplayMenu();
                 Choice = GetMainMenuChoice();
                 PlayGame();
             }
         }
+
+        public static void CreateTraps(int n)
+        {
+
+            for (int i=0; i<n; i++)
+            {
+                Actor newTrap = Cavern.CreateActor(graphic: 'T', isVisible: true);
+                newTrap.MoveTo(Cavern.GetRandomPosition());
+                Traps.Add(newTrap);
+            }
+        }
+
         public static void DisplayMenu()
         {
             Console.WriteLine("\nMAIN MENU\n");
@@ -71,36 +86,37 @@ namespace monster
         }
         public static void MakeMove(char Direction)
         {
-            char[] validMoves = {'n', 's', 'w', 'e'};
+            char[] validMoves = { 'n', 's', 'w', 'e', 'm'};
             if (!validMoves.Contains(Direction)) throw new Exception();
 
             switch (Direction)
             {
                 case 'n':
                     Player.SetY(Player.Y - 1);
-                    break;
+                    return;
                 case 's':
                     Player.SetY(Player.Y + 1);
-                    break;
+                    return;
                 case 'w':
                     Player.SetX(Player.X - 1);
-                    break;
+                    return;
                 case 'e':
                     Player.SetX(Player.X + 1);
-                    break;
+                    return;
             }
         }
 
         public static void MakeMonsterMove()
         {
-            if (Cavern.DoActorsCollide(Monster, Flask))
+            Monster.IsVisible = true;
+
             if (Monster.Y < Player.Y)
             {
                 Monster.SetY(Monster.Y + 1);
             }
             else if (Monster.Y > Player.Y)
             {
-               Monster.SetY(Monster.Y - 1);
+                Monster.SetY(Monster.Y - 1);
             }
 
             else if (Monster.X < Player.X)
@@ -113,6 +129,7 @@ namespace monster
                 Monster.SetX(Monster.X - 1);
             }
         }
+
         public static void DisplayLostGameMessage()
         {
             Console.WriteLine("ARGHHHHHH! The monster has eaten you. GAME OVER.");
@@ -134,7 +151,12 @@ namespace monster
 
             int Count = 0;
             char MoveDirection = ' ';
-            
+
+            //I just wanted to try out events :)
+            Player.OnMove += (Actor self) => {
+                if (self.DoesCollideMultiple(Traps)) TrapIsTriggered = true;
+            };
+
             Cavern.Draw();
 
             while (!(Eaten || MoveDirection == 'm' || HasWon))
@@ -148,9 +170,10 @@ namespace monster
                         MakeMove(MoveDirection);
                         break;
                     }
-                    catch(Exception)
+                    catch (Exception)
                     {
                         Console.WriteLine("\nInvalid Input!");
+                        Cavern.Draw();
                     }
 
                 }
@@ -166,14 +189,15 @@ namespace monster
                     Cavern.Draw();
 
                     Count = 0;
+
                     while (Count < 2 && !Eaten)
                     {
-                        if (!TrapIsTriggered) TrapIsTriggered = Player.DoesCollideWith(Trap);
-                        if (TrapIsTriggered) {
+                        if (TrapIsTriggered)
+                        {
                             Monster.IsVisible = true;
                             MakeMonsterMove();
                         }
-                
+
                         Eaten = Monster.DoesCollideWith(Player);
 
                         Console.WriteLine();
@@ -189,4 +213,5 @@ namespace monster
             }
         }
     }
+
 }

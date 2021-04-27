@@ -29,49 +29,59 @@ namespace monster
 
     class GameCanvas {
 
-        public char[,] Grid;
+       public char[,] Grid;
 
-        private int _rows; 
-        private int _cols; 
-        public int Width {
+        private int _rows;
+        private int _cols;
+        public int Width
+        {
             get => _cols;
         }
 
-        public int Height {
+        public int Height
+        {
             get => _rows;
         }
-    
+
 
         private static Random _rnd = new Random();
 
-        public GameCanvas(int width, int height) {
+        public GameCanvas(int width, int height)
+        {
             _rows = height;
             _cols = width;
             Grid = new char[height, width];
-            Reset();    
+            Reset();
         }
 
-        public void Reset() {
-            for (int Row=0; Row < _rows; Row++) {
-                for (int Col=0; Col < _cols; Col++) {
+        public void Reset()
+        {
+            for (int Row = 0; Row < _rows; Row++)
+            {
+                for (int Col = 0; Col < _cols; Col++)
+                {
                     Grid[Row, Col] = ' ';
-                } 
+                }
             }
         }
 
-        public Actor CreateActor(char graphic, bool isVisible=true) {
+        public Actor CreateActor(char graphic, bool isVisible = true)
+        {
             return new Actor(this, graphic, isVisible);
-        } 
-        
-        public bool IsPositionValid(int x, int y) => !((x > _cols || x < 0) || (y > _rows || y < 0));        
-        public bool DoActorsCollide(Actor actor1, Actor actor2) => (actor1.X == actor2.X) && (actor1.Y == actor2.Y); 
+        }
 
-        public void Draw() {
+        public bool IsPositionValid(int x, int y) => !( (x == _cols || x < 0) || (y == _rows || y < 0) );
+
+        public bool DoActorsCollide(Actor actor1, Actor actor2) => (actor1.X == actor2.X) && (actor1.Y == actor2.Y);
+
+        public void Draw()
+        {
 
             for (int Row = 0; Row < _rows; Row++)
             {
                 Console.WriteLine(new String('-', (2 * _cols) + 1));
-                for (int Col = 0; Col < _cols; Col++)  {
+                for (int Col = 0; Col < _cols; Col++)
+                {
                     Console.Write("|" + Grid[Row, Col]);
                 }
                 Console.WriteLine("|");
@@ -79,12 +89,14 @@ namespace monster
             Console.WriteLine(new String('-', (2 * _cols) + 1));
             Console.WriteLine();
         }
-        public (int x, int y) GetRandomPosition() {
+
+
+        public (int x, int y) GetRandomPosition()
+        {
             int x = _rnd.Next(0, _cols - 1);
             int y = _rnd.Next(0, _rows - 1);
-            return (x,y);
+            return (x, y);
         }
 
-    }
-        
+    }        
 }
