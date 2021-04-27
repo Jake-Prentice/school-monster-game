@@ -31,13 +31,26 @@ namespace monster
             int Choice = 0;
             while (Choice != 3)
             {
-                Player.MoveTo(Cavern.GetRandomPosition());
-                Monster.MoveTo(Cavern.GetRandomPosition());
-                Flask.MoveTo(Cavern.GetRandomPosition());
-
                 DisplayMenu();
                 Choice = GetMainMenuChoice();
-                PlayGame();
+
+                switch(Choice) {
+                    case 1:
+                        
+                        Player.MoveTo(Cavern.GetRandomPosition());
+                        Monster.MoveTo(Cavern.GetRandomPosition());
+                        Flask.MoveTo(Cavern.GetRandomPosition());
+
+                        PlayGame();
+                        break;
+
+                    case 2:
+                        break;
+                    
+                    case 3:
+                        break;
+
+                }
             }
         }
 
@@ -56,6 +69,7 @@ namespace monster
         {
             Console.WriteLine("\nMAIN MENU\n");
             Console.WriteLine("1. Start new game");
+            Console.WriteLine("2. Load Game");
             Console.WriteLine("3. Quit");
             Console.WriteLine();
             Console.WriteLine("Please enter your choice: ");
@@ -165,7 +179,10 @@ namespace monster
                     try
                     {
                         DisplayMoveOptions();
+                        
                         MoveDirection = GetMove();
+                        if (MoveDirection == 'm') return;
+
                         MakeMove(MoveDirection);
                         break;
                     }
@@ -176,15 +193,13 @@ namespace monster
                     }
 
                 }
-                if (MoveDirection != 'm')
-                {
-                    Cavern.Draw();
+                
+                Cavern.Draw();
 
-                    Eaten = Monster.DoesCollideWith(Player);
-                    HasWon = Player.DoesCollideWith(Flask);
-                }
-                if (!Eaten && !HasWon)
-                {
+                Eaten = Monster.DoesCollideWith(Player);
+                HasWon = Player.DoesCollideWith(Flask);
+                
+                if (!Eaten && !HasWon) {
                     Cavern.Draw();
 
                     Count = 0;
@@ -207,9 +222,12 @@ namespace monster
                         Count = Count + 1;
                     }
                 }
+                
                 if (Eaten) DisplayLostGameMessage();
                 else if (HasWon) DisplayWonGameMessage();
+
             }
+
         }
     }
 
