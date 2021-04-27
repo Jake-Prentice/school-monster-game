@@ -108,7 +108,6 @@ namespace monster
 
         public static void MakeMonsterMove()
         {
-            Monster.IsVisible = true;
 
             if (Monster.Y < Player.Y)
             {
