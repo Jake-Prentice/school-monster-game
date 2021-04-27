@@ -29,12 +29,13 @@ namespace monster
             CreateTraps(n: 2);
          
             int Choice = 0;
-            while (Choice != 3)
+            while (Choice != 4)
             {
                 DisplayMenu();
                 Choice = GetMainMenuChoice();
 
                 switch(Choice) {
+                    //start game
                     case 1:
                         
                         Player.MoveTo(Cavern.GetRandomPosition());
@@ -44,10 +45,16 @@ namespace monster
                         PlayGame();
                         break;
 
+                    //load game
                     case 2:
                         break;
                     
+                    //save game
                     case 3:
+                        break;
+
+                    //quit game;
+                    case 4:
                         break;
 
                 }
@@ -70,7 +77,8 @@ namespace monster
             Console.WriteLine("\nMAIN MENU\n");
             Console.WriteLine("1. Start new game");
             Console.WriteLine("2. Load Game");
-            Console.WriteLine("3. Quit");
+            Console.WriteLine("3. Save current game");
+            Console.WriteLine("4. Quit");
             Console.WriteLine();
             Console.WriteLine("Please enter your choice: ");
         }
